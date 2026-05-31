@@ -1,0 +1,15 @@
+# Python virtual environment
+venv/
+.venv/
+__pycache__/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Node
+node_modules/

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🖐️ Gesture 3D Interaction</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- 顶栏 -->
+  <header id="header">
+    <h1>🎮 Gesture 3D Interaction</h1>
+    <div id="gesture-badge">
+      <span id="gesture-icon">🖐️</span>
+      <span id="gesture-label">等待检测...</span>
+    </div>
+    <div id="fps-counter">FPS: --</div>
+  </header>
+
+  <!-- 主区域 -->
+  <main id="main-area">
+    <!-- 左侧摄像头 -->
+    <section id="camera-panel">
+      <div id="camera-wrapper">
+        <video id="webcam-video" autoplay playsinline></video>
+        <canvas id="landmark-canvas"></canvas>
+      </div>
+      <div id="camera-status">📷 摄像头未启动</div>
+    </section>
+
+    <!-- 右侧3D画布 -->
+    <section id="scene-panel">
+      <canvas id="three-canvas"></canvas>
+    </section>
+  </main>
+
+  <!-- 底部提示栏 -->
+  <footer id="hint-bar">
+    <div class="hint-item" data-gesture="fist">✊ 握拳：抓取物体</div>
+    <div class="hint-item" data-gesture="peace">✌️ 双指：旋转场景</div>
+    <div class="hint-item" data-gesture="pinch">🤏 捏合：拖拽/缩放</div>
+    <div class="hint-item" data-gesture="open">🖐️ 张开：释放</div>
+    <div class="hint-item" data-gesture="point">👆 指向：选择</div>
+    <div class="hint-item" data-gesture="thumbs_up">👍 赞：放大</div>
+    <div class="hint-item" data-gesture="thumbs_down">👎 踩：缩小</div>
+  </footer>
+
+  <!-- 加载遮罩 -->
+  <div id="loading-overlay">
+    <div id="loading-spinner"></div>
+    <div id="loading-text">正在初始化...</div>
+  </div>
+
+  <!-- Three.js Import Map -->
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://unpkg.com/three@0.160.0/build/three.module.js"
+      }
+    }
+  </script>
+
+  <!-- MediaPipe CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js" crossorigin="anonymous"></script>
+
+  <!-- App Entry -->
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

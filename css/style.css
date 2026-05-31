@@ -1,0 +1,278 @@
+/* ============================================
+   Gesture 3D Interaction — Styles
+   ============================================ */
+
+:root {
+  --bg: #0f0f14;
+  --surface: #1a1a24;
+  --border: #2a2a3a;
+  --text: #e0e0e8;
+  --text-dim: #8888a0;
+  --accent: #6c5ce7;
+  --accent-glow: #a29bfe;
+  --success: #00cec9;
+  --warning: #fdcb6e;
+  --danger: #ff7675;
+  --radius: 10px;
+  --transition: 0.2s ease;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  user-select: none;
+}
+
+/* ---- Header ---- */
+#header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 12px 24px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  min-height: 56px;
+  z-index: 10;
+}
+
+#header h1 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  background: linear-gradient(135deg, var(--accent-glow), var(--success));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+#gesture-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  font-size: 0.95rem;
+  transition: all var(--transition);
+}
+
+#gesture-badge.active {
+  border-color: var(--accent);
+  box-shadow: 0 0 12px rgba(108, 92, 231, 0.3);
+}
+
+#gesture-icon {
+  font-size: 1.3rem;
+}
+
+#gesture-label {
+  color: var(--text-dim);
+  font-weight: 500;
+  min-width: 80px;
+}
+
+#fps-counter {
+  margin-left: auto;
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  font-variant-numeric: tabular-nums;
+  font-family: 'Cascadia Code', 'Fira Code', monospace;
+}
+
+/* ---- Main Area ---- */
+#main-area {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+}
+
+/* ---- Camera Panel (Left) ---- */
+#camera-panel {
+  width: 340px;
+  min-width: 340px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  gap: 12px;
+}
+
+#camera-wrapper {
+  position: relative;
+  width: 300px;
+  height: 225px;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: #000;
+  border: 2px solid var(--border);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+  transition: border-color var(--transition);
+}
+
+#camera-wrapper.active {
+  border-color: var(--accent);
+  box-shadow: 0 4px 24px rgba(108, 92, 231, 0.25);
+}
+
+#webcam-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* Mirror for natural feel */
+  transform: scaleX(-1);
+}
+
+#landmark-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* Also mirror to match video */
+  transform: scaleX(-1);
+}
+
+#camera-status {
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  text-align: center;
+}
+
+/* ---- Scene Panel (Right) ---- */
+#scene-panel {
+  flex: 1;
+  position: relative;
+  background: radial-gradient(ellipse at center, #1a1a2e 0%, #0a0a12 100%);
+}
+
+#three-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Scene overlay hints */
+#scene-hint {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 8px 20px;
+  background: rgba(0,0,0,0.6);
+  border-radius: 20px;
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  pointer-events: none;
+  transition: opacity 0.5s;
+}
+
+/* ---- Footer / Hint Bar ---- */
+#hint-bar {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  padding: 10px 24px;
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  flex-wrap: wrap;
+}
+
+.hint-item {
+  padding: 5px 12px;
+  border-radius: 14px;
+  font-size: 0.82rem;
+  color: var(--text-dim);
+  background: var(--bg);
+  border: 1px solid transparent;
+  transition: all var(--transition);
+  cursor: default;
+}
+
+.hint-item.active {
+  color: var(--text);
+  border-color: var(--accent);
+  background: rgba(108, 92, 231, 0.15);
+  box-shadow: 0 0 10px rgba(108, 92, 231, 0.25);
+}
+
+/* ---- Loading Overlay ---- */
+#loading-overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  z-index: 100;
+  transition: opacity 0.5s;
+}
+
+#loading-overlay.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+#loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid var(--border);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+#loading-text {
+  font-size: 0.95rem;
+  color: var(--text-dim);
+}
+
+/* ---- Camera Error State ---- */
+#camera-panel.error #camera-wrapper {
+  border-color: var(--danger);
+  box-shadow: 0 4px 20px rgba(255, 118, 117, 0.3);
+}
+
+#camera-panel.error #camera-status {
+  color: var(--danger);
+}
+
+/* ---- Responsive: stack on narrow screens ---- */
+@media (max-width: 900px) {
+  #main-area {
+    flex-direction: column;
+  }
+  #camera-panel {
+    width: 100%;
+    min-width: unset;
+    flex-direction: row;
+    padding: 12px;
+    gap: 12px;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+  }
+  #camera-wrapper {
+    width: 200px;
+    height: 150px;
+  }
+  #scene-panel {
+    min-height: 400px;
+  }
+}
